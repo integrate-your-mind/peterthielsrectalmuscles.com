@@ -1,6 +1,7 @@
 <html><head><base href="." />
 <title>Peter Thiel's Rectal Symphony - WARNING</title>
 <script src="https://unpkg.com/htmx.org@1.9.9"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <style>
   body {
     font-family: 'Comic Sans MS', cursive;
@@ -20,6 +21,22 @@
     text-align: center;
     margin: 20px;
     animation: blink 1s infinite;
+    text-shadow: 0 0 10px red;
+  }
+
+  @keyframes rainbow {
+    0% { color: red; }
+    14% { color: orange; }
+    28% { color: yellow; }
+    42% { color: green; }
+    57% { color: blue; }
+    71% { color: indigo; }
+    85% { color: violet; }
+    100% { color: red; }
+  }
+
+  .rainbow-text {
+    animation: rainbow 3s linear infinite;
   }
 
   @keyframes blink {
@@ -47,6 +64,25 @@
     height: 300px;
     margin: 20px;
     cursor: pointer;
+    transition: transform 2s ease-in-out;
+  }
+
+  .sphincter-container:hover {
+    animation: shake 0.5s infinite;
+  }
+
+  @keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
   }
 
   .sphincter {
@@ -78,6 +114,12 @@
     max-width: 600px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     transform: rotate(-1deg);
+    transition: all 0.3s ease;
+  }
+
+  .fact:hover {
+    transform: scale(1.1) rotate(2deg);
+    background: #ffeb3b;
   }
 
   .fact:nth-child(even) {
@@ -85,7 +127,9 @@
   }
 
   .invest-button {
-    background: #4CAF50;
+    background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
+    background-size: 600% 100%;
+    animation: gradient 5s linear infinite;
     border: none;
     color: white;
     padding: 15px 30px;
@@ -96,8 +140,14 @@
     transition: transform 0.2s;
   }
 
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
   .invest-button:hover {
-    transform: scale(1.1);
+    transform: scale(1.1) rotate(3deg);
   }
 
   .btc-address {
@@ -114,10 +164,31 @@
   .btc-address:hover {
     background: #e17f0e;
     transform: scale(1.05);
+    animation: shake 0.5s infinite;
+  }
+
+  .meme-face {
+    font-size: 3em;
+    position: fixed;
+    opacity: 0;
+    pointer-events: none;
   }
 
   #stretchy-area {
     transition: all 0.5s ease;
+  }
+
+  .doge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    font-size: 24px;
+    animation: bounce 2s infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
   }
 </style>
 </head>
@@ -125,7 +196,7 @@
 
 <div class="warning">⚠️ WARNING: EXTREME MUSCLE CONTENT AHEAD ⚠️</div>
 
-<h1 class="headline">Peter Thiel's Remarkable Rectal Muscles: A Silicon Valley Secret</h1>
+<h1 class="headline rainbow-text">Peter Thiel's Remarkable Rectal Muscles: A Silicon Valley Secret</h1>
 
 <div class="sphincter-container" 
      hx-post="/stretch"
@@ -149,7 +220,7 @@
 
 <div id="stretchy-area">
   <div class="fact">
-    Did you know? Peter Thiel can reportedly clench his rectal muscles with such precision that he can crack a walnut at 50 paces. This is completely unverified and probably false.
+    SUCH MUSCLES! Much clench! Very strength! WOW! 🐕
   </div>
 </div>
 
@@ -161,14 +232,45 @@
   In his quest for immortality, Thiel has allegedly trained his rectal muscles to perform complex calculus. Scientists remain skeptical.
 </div>
 
-<button class="invest-button" onclick="invest()">Invest in Rectal Tech</button>
+<button class="invest-button" onclick="invest()">INVEST NOW! MUCH GAINS! WOW!</button>
 
 <div class="btc-address" onclick="copyBtcAddress()" title="Click to copy">
-  💰 Tip jar: bc1qgm3rkpg3an84x8urd3exqzcde669tx5zmf0r3k
+  💰 SUCH TIP JAR! MANY COIN! bc1qgm3rkpg3an84x8urd3exqzcde669tx5zmf0r3k
 </div>
+
+<div class="doge">🐕</div>
 
 <script>
 let investmentCount = 0;
+
+function spawnMeme(text, x, y) {
+    const meme = document.createElement('div');
+    meme.className = 'meme-face';
+    meme.textContent = text;
+    meme.style.left = x + 'px';
+    meme.style.top = y + 'px';
+    document.body.appendChild(meme);
+
+    anime({
+        targets: meme,
+        opacity: [0, 1],
+        translateY: -100,
+        rotate: anime.random(-45, 45),
+        duration: 1000,
+        complete: function() {
+            setTimeout(() => {
+                anime({
+                    targets: meme,
+                    opacity: 0,
+                    duration: 1000,
+                    complete: function() {
+                        meme.remove();
+                    }
+                });
+            }, 1000);
+        }
+    });
+}
 
 function createRings(event) {
     const ring = document.createElement('div');
@@ -177,35 +279,37 @@ function createRings(event) {
     ring.style.top = (event.clientY - 25) + 'px';
     document.body.appendChild(ring);
     setTimeout(() => ring.remove(), 2000);
+    
+    const memes = ['WOW!', 'SUCH FLEX!', 'MUCH MUSCLE!', '💪', '🚀', 'TO THE MOON!'];
+    spawnMeme(memes[Math.floor(Math.random() * memes.length)], event.clientX, event.clientY);
 }
 
 function invest() {
     investmentCount++;
     const responses = [
-        "Congratulations! You've just invested in Sphincter Coin™",
-        "Your funds are now being processed through our proprietary rectal blockchain",
-        "Peter Thiel's muscles thank you for your contribution",
-        "Warning: This investment may be a pain in the...",
-        "Processing... Please clench while you wait"
+        "SUCH INVESTMENT! VERY PROFIT! WOW!",
+        "MANY COINS! MUCH SPHINCTER! TO THE MOON! 🚀",
+        "WOW! VERY BLOCKCHAIN! SUCH INNOVATION!",
+        "MUCH MUSCLE! VERY STRENGTH! SO RICH!",
+        "WOW! SUCH GAINZ! VERY PUMP!"
     ];
     
     alert(responses[investmentCount % responses.length]);
     
     if (investmentCount === 3) {
-        alert("🚨 Breaking News: The SEC has begun investigating this website for suspicious muscle activity");
+        alert("🚨 MUCH REGULATE! VERY SEC! WOW!");
     }
 }
 
 function copyBtcAddress() {
     const address = "bc1qgm3rkpg3an84x8urd3exqzcde669tx5zmf0r3k";
     navigator.clipboard.writeText(address).then(() => {
-        alert("Bitcoin address copied to clipboard! Thanks for supporting this masterpiece of web art 🎨");
+        alert("WOW! SUCH COPY! VERY CLIPBOARD! MUCH THANKS! 🎨");
     }).catch(err => {
-        alert("Failed to copy address. Please copy it manually!");
+        alert("NO COPY! MUCH SAD! PLEASE MANUAL!");
     });
 }
 
-// Easter egg: Konami code triggers a special animation
 let keys = [];
 const konami = 'ArrowUpArrowUpArrowDownArrowDownArrowLeftArrowRightArrowLeftArrowRightba';
 
@@ -215,21 +319,27 @@ document.addEventListener('keydown', (e) => {
     
     if (keys.join('') === konami) {
         document.querySelector('.sphincter-container').style.transform = 'rotate(720deg)';
-        alert("🎉 Congratulations! You've unlocked Peter Thiel's secret muscle technique!");
+        alert("WOW! SUCH SECRET! VERY UNLOCK! MUSCLE POWER MAXIMUM!");
     }
 });
 
-// Mock HTMX endpoint response
 htmx.on("htmx:afterRequest", function(evt) {
     if (evt.detail.pathInfo.requestPath === "/stretch") {
         evt.detail.target.innerHTML = `
             <div class="fact" style="transform: scale(1.5)">
-                MAXIMUM MUSCLE EXPANSION ACHIEVED! 
-                Peter Thiel's rectal muscles have reached their final form!
+                MUCH EXPANSION! VERY ACHIEVE! 
+                SUCH FINAL FORM! WOW! 🚀
             </div>
         `;
     }
 });
+
+// Add random doge phrases floating up
+setInterval(() => {
+    const phrases = ['wow!', 'such muscle!', 'very flex!', 'much strong!'];
+    const x = Math.random() * window.innerWidth;
+    spawnMeme(phrases[Math.floor(Math.random() * phrases.length)], x, window.innerHeight);
+}, 3000);
 </script>
 
 </body>
